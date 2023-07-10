@@ -1,0 +1,94 @@
+<div class="container mt-5" style="width: 664px">
+    <form
+      [formGroup]="addForm"
+      (ngSubmit)="onCreateGuestTable()"
+      autocomplete="off"
+    >
+      <mat-card>
+        <mat-card-header style="justify-content: center"
+          ><h2 class="text-primary">Thêm mới bàn ăn</h2></mat-card-header
+        >
+        <hr />
+        <mat-card-content style="justify-content: center">
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="form-input">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                class="form-control"
+                formControlName="name"
+                name="name"
+                [class.is-invalid]="
+                  addForm.get('name')?.errors && addForm.get('name')?.touched
+                "
+              />
+              <p
+                class="invalid-feedback"
+                *ngIf="addForm.get('name')?.hasError('required')"
+              >
+                Please enter name
+              </p>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="form-input">
+              <mat-label>Description</mat-label>
+              <input
+                matInput
+                class="form-control"
+                formControlName="description"
+                [class.is-invalid]="
+                  addForm.get('description')?.errors && addForm.get('description')?.touched
+                "
+              />
+              <p
+                class="invalid-feedback"
+                *ngIf="addForm.get('description')?.hasError('required')"
+              >
+                Please enter description
+              </p>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="form-input">
+              <mat-label>Khu vực</mat-label>
+              <mat-select formControlName="locationId" (selectionChange)="onLocationChange($event.value)">
+                <mat-option *ngFor="let location of displayLocation" [value]="location.id">
+                    {{location.name}}
+                </mat-option>
+              </mat-select>
+              <p
+                class="invalid-feedback"
+                *ngIf="addForm.get('locationId')?.hasError('required')"
+              >
+                Please enter location
+              </p>
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="form-input">
+              <mat-label>Tình trạng</mat-label>
+              <mat-select formControlName="statusId" (selectionChange)="onStatusChange($event.value)">
+                <mat-option *ngFor="let status of displayStatus" [value]="status.id">
+                    {{status.name}}
+                </mat-option>
+              </mat-select>
+              <p
+                class="invalid-feedback"
+                *ngIf="addForm.get('description')?.hasError('required')"
+              >
+                Please enter status
+              </p>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions style="justify-content: space-evenly" class="mb-3">
+          <button mat-raised-button color="primary" type="submit">Thêm</button>
+          <button mat-raised-button routerLink="/guest-table">
+            Trở về trang chính
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+  

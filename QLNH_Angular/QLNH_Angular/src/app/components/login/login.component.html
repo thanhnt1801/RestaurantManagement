@@ -1,0 +1,43 @@
+<h2 mat-dialog-title class="text-center">Login</h2>
+<hr>
+<mat-dialog-content>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>User Name</mat-label>
+      <input [(ngModel)]="loginModel.userName" type="text" matInput placeholder="UserName" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input [(ngModel)]="loginModel.password" type="password" matInput placeholder="Password" />
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <button mat-raised-button 
+        color="primary" 
+        (click)="onCreate(loginModel)" 
+        [mat-dialog-close]="loginModel" 
+        cdkFocusInitial>Login</button>
+        <button
+        style="margin-right: 10px"
+        mat-raised-button
+        (click)="onNoClick()"
+      >
+        Return
+      </button>
+  </div>
+
+
+      <!-- <button
+        mat-raised-button
+        (click)="onCreate(loginModel)"
+        [mat-dialog-close]="loginModel"
+        cdkFocusInitial
+      >
+        Login
+      </button> -->
+</mat-dialog-content>
+

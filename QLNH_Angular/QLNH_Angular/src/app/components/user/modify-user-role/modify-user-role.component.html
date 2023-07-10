@@ -1,0 +1,49 @@
+<h2 mat-dialog-title class="text-center">Login</h2>
+<hr>
+<form [formGroup]="modifyRoleForm" (ngSubmit)="onModify()">
+  <mat-dialog-content>
+    <div class="mb-3">
+      <mat-form-field appearance="outline" class="form-input">
+        <mat-label>Id</mat-label>
+        <input matInput
+            readonly
+            class="form-control" 
+            type="text" name="id"
+            formControlName="id"
+            [class.is-invalid]="modifyRoleForm.get('id')?.errors
+                && modifyRoleForm.get('id')?.touched">
+        <p class="invalid-feedback">Please enter name</p>
+    </mat-form-field>
+    </div>
+    <div class="mb-3">
+      <mat-form-field appearance="outline" class="form-input">
+        <mat-label>Vai trò</mat-label>
+        <mat-select formControlName="roleId" 
+        [class.is-invalid]="modifyRoleForm.get('roleId')?.errors
+                && modifyRoleForm.get('roleId')?.touched">
+          <mat-option *ngFor="let role of displayRole" [value]="role.id">
+            {{role.name}}
+          </mat-option>
+        </mat-select>
+        <p class="invalid-feedback">Please enter name</p> 
+      </mat-form-field>
+    </div>
+  
+    <div class="d-flex justify-content-between">
+      <button mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [mat-dialog-close]="modifyRoleForm" 
+          cdkFocusInitial>Đồng ý</button>
+          <button
+          style="margin-right: 10px"
+          mat-raised-button
+          (click)="onNoClick()"
+        >
+          Trở lại
+        </button>
+    </div>
+  </mat-dialog-content>
+</form>
+
+

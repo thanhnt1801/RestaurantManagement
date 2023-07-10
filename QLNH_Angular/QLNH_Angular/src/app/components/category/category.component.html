@@ -1,0 +1,84 @@
+<br>
+<ng-container *ngIf="loading">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-container>
+<div *ngIf="!loading">
+  <mat-card class="card-header"
+    ><button mat-raised-button routerLink="/add-category">
+      <mat-icon class="create-icon" fontIcon="add_box"></mat-icon>Thêm mới
+    </button>
+  </mat-card>
+  <br />
+  <p-organizationChart
+    [value]="orgChart"
+    selectionMode="single"
+    [(selection)]="selectedNode"
+    (onNodeSelect)="onNodeSelect($event)"
+    styleClass="category"
+  >
+    <ng-template let-node pTemplate="category">
+      <div
+        class="p-corner-top"
+        [ngClass]="
+          node.data?.deleted == false ? 'node-header' : 'node-header-deleted'
+        "
+      >
+        {{ node.data.name }}
+      </div>
+      <div class="node-content">
+        <div *ngIf="!node.data.isRoot">
+          <div>Mô tả: {{ node.data.description }}</div>
+          <div>
+            Xóa:
+            <p
+              [ngClass]="
+                node.data.deleted === true
+                  ? 'deleted-status-true'
+                  : 'deleted-status-false'
+              "
+            >
+              {{ node.data.deleted }}
+            </p>
+          </div>
+          <br />
+          <div>
+            <tr>
+              <td>
+                <button
+                  mat-raised-button
+                  class="green-background white-icon"
+                  routerLink="/edit-category/{{node.data.id}}"
+                >
+                  <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+                </button>
+              </td>
+              <td>
+                <button
+                  mat-raised-button
+                  class="green-background white-icon"
+                  [disabled]="node.data.deleted"
+                  (click)="onDelete(node.data.id)"
+                >
+                  <mat-icon class="delete-icon" fontIcon="delete"></mat-icon>
+                </button>
+              </td>
+              <td>
+                <button
+                  mat-raised-button
+                  class="green-background white-icon"
+                  [disabled]="!node.data.deleted"
+                  (click)="onRestore(node.data.id)"
+                >
+                  <mat-icon class="restore-icon" fontIcon="restore"></mat-icon>
+                </button>
+              </td>
+            </tr>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template let-node pTemplate="department">
+      <!-- {{ node.label }} -->
+    </ng-template>
+  </p-organizationChart>
+</div>

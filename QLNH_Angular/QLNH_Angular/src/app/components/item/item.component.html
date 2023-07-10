@@ -1,0 +1,107 @@
+<br>
+<p style="font-size: 200%" *ngIf="loading">Đang tải dữ liệu ...</p>
+<div *ngIf="!loading">
+  <div class="card">
+    <mat-card class="card-header"
+      ><button mat-raised-button routerLink="/add-item">
+        <mat-icon class="create-icon" fontIcon="add_box"></mat-icon>Thêm mới
+      </button>
+    </mat-card>
+    <br />
+    <p-table
+      [value]="displayItems"
+      dataKey="id"
+      rowGroupMode="subheader"
+      groupRowsBy="displayItemsname"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Tên món ăn</th>
+          <th>Mô tả</th>
+          <th>Giảm giá (%)</th>
+          <th>Ngày tạo</th>
+          <th>Ngày cập nhật</th>
+          <th>Xóa</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-item
+        let-rowData
+        let-rowIndex="rowIndex"
+        let-expanded="expanded"
+        let-ri="rowIndex"
+        let-columns="columns"
+      >
+        <tr>
+          <td colspan="1">
+            <button
+              type="button"
+              pButton
+              pRipple
+              [pRowToggler]="rowData"
+              class="p-button-text p-button-rounded p-button-plain p-mr-2"
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            ></button>
+            <span class="p-text">{{ item.name }}</span>
+          </td>
+          <td class="p-text">{{ item.description }}</td>
+          <td class="p-text">{{ item.discount }}</td>
+          <td class="p-text">{{ item.created | date: "short":"GMT" }}</td>
+          <td class="p-text">{{ item.updated | date: "short":"GMT" }}</td>
+          <td
+            class="p-text"
+            [ngClass]="
+              item.deleted === true
+                ? 'deleted-status-true'
+                : 'deleted-status-false'
+            "
+          >
+            {{ item.deleted }}
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              class="green-background white-icon"
+              routerLink="/edit-item/{{item.id}}"
+            >
+              <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+            </button>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              class="green-background white-icon"
+              [disabled]="item.deleted"
+              (click)="onDelete(item.id)"
+            >
+              <mat-icon class="delete-icon" fontIcon="delete"></mat-icon>
+            </button>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              class="green-background white-icon"
+              [disabled]="!item.deleted"
+              (click)="onRestore(item.id)"
+            >
+              <mat-icon class="restore-icon" fontIcon="restore"></mat-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="rowexpansion"
+        let-rowData
+        let-columns="columns"
+        let-expanded
+      >
+        <tr>
+          <td [attr.colspan]="9">
+            <app-price [selectedItem]="rowData"></app-price>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

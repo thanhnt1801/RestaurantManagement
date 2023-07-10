@@ -1,0 +1,40 @@
+<div class="container mt-5" style="width: 664px">
+    <form [formGroup]="editForm" (ngSubmit)="onEditUnit()" autocomplete="off">
+        <mat-card>
+            <mat-card-header class="justify-content-center">
+                <h2 class="text-primary">Chỉnh sửa</h2>
+            </mat-card-header>
+            <hr>
+            <mat-card-content>
+                <div class="mb-3">
+                    <mat-form-field appearance="outline" class="form-input">
+                        <mat-label>Name</mat-label>
+                        <input matInput
+                            class="form-control" 
+                            type="text" name="name"
+                            formControlName="name"
+                            [class.is-invalid]="editForm.get('name')?.errors
+                                && editForm.get('name')?.touched">
+                        <p class="invalid-feedback">Please enter name</p>
+                    </mat-form-field>
+                  </div>
+                  <div class="mb-3">
+                    <mat-form-field appearance="outline" class="form-input">
+                        <mat-label>Description</mat-label>
+                        <input matInput
+                            class="form-control" 
+                            type="text" name="description"
+                            formControlName="description"
+                            [class.is-invalid]="editForm.get('description')?.errors
+                                && editForm.get('description')?.touched">
+                        <p class="invalid-feedback">Please enter description</p>
+                    </mat-form-field>
+                  </div>
+            </mat-card-content>
+            <mat-card-actions class="justify-content-evenly mb-3">
+                <button mat-raised-button color="primary" type="submit">Edit</button>
+                <button mat-raised-button color="" routerLink="/unit">Trở về trang chính</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

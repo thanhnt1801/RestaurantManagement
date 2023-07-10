@@ -1,0 +1,107 @@
+<div class="container mt-5" style="width: 664px">
+  <form [formGroup]="addForm" (ngSubmit)="onCreatePrice()" autocomplete="off">
+    <mat-card>
+      <mat-card-header style="justify-content: center"
+        ><h2 class="text-primary">Thêm mới</h2></mat-card-header
+      >
+      <hr />
+      <mat-card-content style="justify-content: center">
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Item</mat-label>
+            <mat-select formControlName="itemId" (selectionChange)="onItemChange($event.value)">
+                <mat-option *ngFor="let item of displayItem" [value]="item.id">
+                    {{item.name}}
+                </mat-option>
+            </mat-select>
+            <p
+              class="invalid-feedback"
+              *ngIf="addForm.get('itemId')?.hasError('required')"
+            >
+              Please enter Item
+            </p>
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-form-field appearance="outline" class="form-input">
+              <mat-label>Unit</mat-label>
+              <mat-select formControlName="unitId" (selectionChange)="onUnitChange($event.value)">
+                  <mat-option *ngFor="let unit of displayUnit" [value]="unit.id">
+                      {{unit.name}}
+                  </mat-option>
+              </mat-select>
+              <p
+                class="invalid-feedback"
+                *ngIf="addForm.get('unitId')?.hasError('required')"
+              >
+                Please enter Unit
+              </p>
+            </mat-form-field>
+        </div>
+        <div class="mb-3">
+            <mat-form-field appearance="outline" class="form-input">
+              <mat-label>Size</mat-label>
+              <mat-select formControlName="sizeId" (selectionChange)="onSizeChange($event.value)">
+                  <mat-option *ngFor="let size of displaySize" [value]="size.id">
+                      {{size.name}}
+                  </mat-option>
+              </mat-select>
+              <p
+                class="invalid-feedback"
+                *ngIf="addForm.get('salePrice')?.hasError('required')"
+              >
+                Please enter Sale Price
+              </p>
+            </mat-form-field>
+          </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Sale Price</mat-label>
+            <input
+              matInput
+              class="form-control"
+              formControlName="salePrice"
+              name="salePrice"
+              [class.is-invalid]="
+                addForm.get('salePrice')?.errors &&
+                addForm.get('salePrice')?.touched
+              "
+            />
+            <p
+              class="invalid-feedback"
+              *ngIf="addForm.get('salePrice')?.hasError('required')"
+            >
+              Please enter Sale Price
+            </p>
+          </mat-form-field>
+        </div>
+        <div class="mb-3">
+          <mat-form-field appearance="outline" class="form-input">
+            <mat-label>Description</mat-label>
+            <input
+              matInput
+              class="form-control"
+              formControlName="description"
+              [class.is-invalid]="
+                addForm.get('description')?.errors &&
+                addForm.get('description')?.touched
+              "
+            />
+            <p
+              class="invalid-feedback"
+              *ngIf="addForm.get('description')?.hasError('required')"
+            >
+              Please enter description
+            </p>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions style="justify-content: space-evenly" class="mb-3">
+        <button mat-raised-button color="primary" type="submit">Thêm</button>
+        <button mat-raised-button routerLink="/item">
+          Trở về trang chính
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

@@ -1,0 +1,32 @@
+table {
+    min-width: 100%;
+  }
+  
+  .create-icon {
+    color: #20e3b2;
+  }
+  .edit-icon {
+    color: #2cccff;
+  }
+  .delete-icon {
+    color: #ff6651;
+  }
+  .restore-icon {
+    color: rgb(2, 158, 2);
+  }
+  .card-header {
+    max-width: fit-content;
+    margin-left: 10px;
+  }
+  .mat-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  .deleted-status-true {
+    color: #ff6651;
+  }
+  
+  .deleted-status-false {
+    color: green;
+  }
+  

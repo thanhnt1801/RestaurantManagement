@@ -1,0 +1,94 @@
+
+<mat-toolbar color="primary" class="d-flex justify-content-end">
+    <div class="me-auto">
+        <button
+        mat-raised-button
+        color="primary"
+        routerLink="/"
+        *ngIf="!currentRestaurant"
+      >
+        Restaurant Management
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/"
+        *ngIf="currentRestaurant"
+      >
+        {{currentRestaurant.name}}
+      </button>
+    </div>
+    <div class="me-auto" *ngIf="(_accountSerive.currentUser$ | async)">
+      <a
+      mat-flat-button
+      routerLink="/restaurant"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="home"></mat-icon>Nhà hàng</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/role"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="work"></mat-icon>Vai trò</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/user"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="people"></mat-icon>Nhân sự</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/status"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="flag"></mat-icon>Tình trạng</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/location"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="share"></mat-icon>Khu vực</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/unit"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="scale"></mat-icon>Đơn vị</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/category"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="category"></mat-icon>Thể loại</a
+    >
+    <a
+    mat-flat-button
+    routerLink="/guest-table"
+    routerLinkActive="active"
+    class="me-2"
+    ><mat-icon fontIcon="table_restaurant"></mat-icon>Bàn ăn</a
+    >
+    <a
+      mat-flat-button
+      routerLink="/item"
+      routerLinkActive="active"
+      class="me-2"
+      ><mat-icon fontIcon="fastfood"></mat-icon>Món ăn</a
+    >
+    </div>
+    <div class="ml-auto" *ngIf="!(_accountSerive.currentUser$ | async)">
+      <button mat-raised-button (click)="openDialog()">Login</button>
+    </div>
+
+    <div class="ml-auto" *ngIf="_accountSerive.currentUser$ | async">
+      <button mat-raised-button (click)="logout()">Logout</button>
+    </div>
+</mat-toolbar>
+

@@ -1,0 +1,105 @@
+<br>
+<ng-container *ngIf="loading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-container>
+  <br />
+  <mat-card class="card-header"
+    ><button mat-raised-button routerLink="/add-price">
+      <mat-icon class="create-icon" fontIcon="add_box"></mat-icon>Thêm mới
+    </button></mat-card
+  >
+  <br />
+  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Đơn vị</th>
+      <td mat-cell *matCellDef="let price">{{ price.unit.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="size">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Kích cỡ</th>
+        <td mat-cell *matCellDef="let price">{{ price.size.name }}</td>
+      </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Mô tả</th>
+      <td mat-cell *matCellDef="let price">
+        {{ price.description }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="salePrice">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Giá</th>
+        <td mat-cell *matCellDef="let price">
+          {{ price.salePrice | currency: "VND":"symbol":"0.0-0" }}
+        </td>
+      </ng-container>
+    <ng-container matColumnDef="created">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Ngày tạo</th>
+      <td mat-cell *matCellDef="let price">
+        {{ price.created | date : "short" : "GMT" }} <br />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="updated">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Ngày cập nhật</th>
+      <td mat-cell *matCellDef="let price">
+        {{ price.updated | date : "short" : "GMT" }}<br />
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="deleted">
+      <th mat-header-cell *matHeaderCellDef>Xóa</th>
+      <td
+        mat-cell
+        *matCellDef="let price"
+        [ngClass]="
+          price.deleted === true
+            ? 'deleted-status-true'
+            : 'deleted-status-false'
+        "
+      >
+        {{ price.deleted }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="edit-btn">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let price">
+        <button routerLink="/edit-price/{{price.id}}" mat-raised-button class="green-background white-icon">
+          <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete-btn">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let price">
+        <button
+          mat-raised-button
+          class="green-background white-icon"
+          [disabled]="price.deleted"
+          (click)="onDelete(price.id)"
+        >
+          <mat-icon class="delete-icon" fontIcon="delete"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="restore-btn">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let price">
+        <button
+          mat-raised-button
+          class="green-background white-icon"
+          [disabled]="!price.deleted"
+          (click)="onRestore(price.id)"
+        >
+          <mat-icon class="restore-icon" fontIcon="restore"></mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
+</ng-container>
+<mat-paginator
+  #paginator
+  [pageSize]="5"
+  [pageSizeOptions]="[2, 5, 10, 20]"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements"
+>
+</mat-paginator>

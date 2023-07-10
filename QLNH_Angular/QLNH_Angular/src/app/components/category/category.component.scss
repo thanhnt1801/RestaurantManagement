@@ -1,0 +1,88 @@
+table {
+    min-width: 100%;
+  }
+  
+  .create-icon {
+    color: #20e3b2;
+  }
+  .edit-icon {
+    color: #2cccff;
+  }
+  .delete-icon {
+    color: #ff6651;
+  }
+  .restore-icon {
+    color: rgb(2, 158, 2);
+  }
+  .card-header {
+    max-width: fit-content;
+    margin-left: 10px;
+  }
+  .mat-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  .restaurant-selected {
+    margin-right: 10px;
+  }
+  .restaurant-selected .mat-select {
+    height: 30px;
+  }
+  .p-person {
+    padding: 0;
+    border: 0 none;
+  }
+  
+  .node-header,
+  .node-content {
+    padding: 0.5em 0.7rem;
+  }
+  
+  .node-header-deleted,
+  .node-content {
+    padding: 0.5em 0.7rem;
+  }
+  
+  .node-header {
+    background-color: #495ebb;
+    color: #ffffff;
+  }
+  
+  .node-header-deleted {
+    background-color: red;
+    color: #ffffff;
+  }
+  .node-content {
+    text-align: center;
+    border: 1px solid #495ebb;
+  }
+  
+  .node-content img {
+    border-radius: 50%;
+  }
+  
+  .department-cfo {
+    background-color: #7247bc;
+    color: #ffffff;
+  }
+  
+  .department-coo {
+    background-color: #a534b6;
+    color: #ffffff;
+  }
+  
+  .department-cto {
+    background-color: #e9286f;
+    color: #ffffff;
+  }
+  .node-background {
+    background-color: red;
+  }
+  .deleted-status-true {
+    color: red;
+  }
+  
+  .deleted-status-false {
+    color: #495ebb;
+  }
+  

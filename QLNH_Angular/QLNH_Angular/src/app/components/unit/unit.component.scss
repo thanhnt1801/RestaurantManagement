@@ -1,0 +1,38 @@
+table {
+  min-width: 100%;
+}
+
+.create-icon {
+  color: #20e3b2;
+}
+.edit-icon {
+  color: #2cccff;
+}
+.delete-icon {
+  color: #ff6651;
+}
+.card-header {
+  max-width: fit-content;
+  margin-left: 10px;
+}
+.mat-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+.restaurant-selected {
+  margin-right: 10px;
+}
+.restaurant-selected .mat-select {
+  height: 30px;
+}
+
+.restore-icon {
+  color: rgb(2, 158, 2);
+}
+.deleted-status-true {
+  color: #ff6651;
+}
+
+.deleted-status-false {
+  color: green;
+}

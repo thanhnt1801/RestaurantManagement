@@ -1,0 +1,71 @@
+<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+    <h2 class="text-center text-primary">Sign Up</h2>
+    <hr>
+    <div class="mb-3">
+        <input type="text" class="form-control"
+            name="username"
+            formControlName="username"
+            [class.is-invalid]="registerForm.get('username')?.errors
+                && registerForm.get('username')?.touched"
+            placeholder="username">
+            <p class="invalid-feedback">Please enter username</p>
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control"
+            name="password"
+            formControlName="password"
+            placeholder="password"
+            [class.is-invalid]="registerForm.get('password')?.errors
+            && registerForm.get('password')?.touched">
+            <p class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('required')">
+                Please enter password
+            </p>
+            <p class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('minlength')">
+                Min password length is 6
+            </p>
+            <p class="invalid-feedback" *ngIf="registerForm.get('password')?.hasError('maxlength')">
+                Max password length is 12
+            </p>
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+            [class.is-invalid]="registerForm.get('confirmPassword')?.errors
+            && registerForm.get('confirmPassword')?.touched">
+            <p class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+                Please enter confirm password
+            </p>
+            <p class="invalid-feedback" *ngIf="registerForm.get('confirmPassword')?.hasError('noMatching')">
+                Confirm password must match password
+            </p>
+    </div>
+    <div class="d-flex">
+        <div class="mb-3" >
+            <mat-form-field appearance="outline">
+                <mat-label>Select Role</mat-label>
+                <mat-select formControlName="roleId" (selectionChange)="onRoleChange($event.value)">
+                    <mat-option *ngFor="let role of displayRole" [value]="role.id">
+                        {{role.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="mb-3" >
+            <mat-form-field appearance="outline">
+                <mat-label>Select Restaurant</mat-label>
+                <mat-select formControlName="restaurantId" (selectionChange)="onRestaurantChange($event.value)">
+                    <mat-option *ngFor="let restaurant of displayRestaurant" [value]="restaurant.id">
+                        {{restaurant.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>  
+
+    <div class="text-center">
+        <button class="btn btn-success me-2" type="submit">Register</button>
+        <button class="btn btn-dark" type="button" (click)="cancel()">Cancel</button>
+    </div>
+</form>

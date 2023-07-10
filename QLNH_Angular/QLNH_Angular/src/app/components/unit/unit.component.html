@@ -1,0 +1,107 @@
+<br>
+<ng-container *ngIf="loading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<div *ngIf="!loading">
+  <div class="card">
+    <mat-card class="card-header"
+      ><button mat-raised-button routerLink="/add-unit">
+        <mat-icon class="create-icon" fontIcon="add_box"></mat-icon>Thêm mới
+      </button>
+    </mat-card>
+    <br />
+    <p-table
+      [value]="displayUnit"
+      dataKey="id"
+      rowGroupMode="subheader"
+      groupRowsBy="displayUnitsname"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Tên đơn vị</th>
+          <th>Mô tả</th>
+          <th>Ngày tạo</th>
+          <th>Ngày cập nhật</th>
+          <th>Xóa</th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-unit
+        let-rowData
+        let-rowIndex="rowIndex"
+        let-expanded="expanded"
+        let-ri="rowIndex"
+        let-columns="columns"
+      >
+        <tr>
+          <td colspan="1">
+            <button
+              type="button"
+              pButton
+              pRipple
+              [pRowToggler]="rowData"
+              class="p-button-text p-button-rounded p-button-plain p-mr-2"
+              [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+            ></button>
+            <span class="p-text">{{ unit.name }}</span>
+          </td>
+          <td class="p-text">{{ unit.description }}</td>
+          <td class="p-text">{{ unit.created | date: "short":"GMT" }}</td>
+          <td class="p-text">{{ unit.updated | date: "short":"GMT" }}</td>
+          <td
+            class="p-text"
+            [ngClass]="
+              unit.deleted === true
+                ? 'deleted-status-true'
+                : 'deleted-status-false'
+            "
+          >
+            {{ unit.deleted }}
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              class="green-background white-icon"
+              routerLink="/edit-unit/{{unit.id}}"
+            >
+              <mat-icon class="edit-icon" fontIcon="edit"></mat-icon>
+            </button>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              class="green-background white-icon"
+              [disabled]="unit.deleted"
+              (click)="onDelete(unit.id)"
+            >
+              <mat-icon class="delete-icon" fontIcon="delete"></mat-icon>
+            </button>
+          </td>
+          <td>
+            <button
+              mat-raised-button
+              class="green-background white-icon"
+              [disabled]="!unit.deleted"
+              (click)="onRestore(unit.id)"
+            >
+              <mat-icon class="restore-icon" fontIcon="restore"></mat-icon>
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="rowexpansion"
+        let-rowData
+        let-columns="columns"
+        let-expanded
+      >
+        <tr>
+          <td [attr.colspan]="8" class="mb-5">
+            <app-size [selectedUnit]="rowData"></app-size>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
